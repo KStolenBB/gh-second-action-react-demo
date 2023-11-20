@@ -1,7 +1,8 @@
-name: Test Project
+name: Deploy Project
 on: push
 jobs:
   test: 
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -15,7 +16,9 @@ jobs:
       - name: Run tests
         run: npm test
   deploy:
-    runs-on: ubuntu-latest
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest  
     steps:
       - name: Get code
         uses: actions/checkout@v3
